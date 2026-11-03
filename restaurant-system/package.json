@@ -1,0 +1,18 @@
+{
+  "name": "restaurant-management-system",
+  "version": "1.0.0",
+  "description": "Digital Restaurant Workflow Automation & Operations Platform",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node src/server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "nodemailer": "^6.9.7",
+    "socket.io": "^4.7.2",
+    "twilio": "^4.19.0"
+  }
+}

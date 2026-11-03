@@ -1,0 +1,12 @@
+{
+  "name": "restaurant-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite public --config vite.config.js --port 3000",
+    "build": "vite build public"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0"
+  }
+}

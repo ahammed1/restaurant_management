@@ -1,0 +1,337 @@
+{
+  "restaurant": {
+    "name": "Aura Modern Dining & Kitchen",
+    "address": "100 Feet Road, Indiranagar, Bengaluru",
+    "phone": "+91 80 4920 1200",
+    "email": "concierge@auradining.com"
+  },
+  "tables": [
+    {
+      "id": "T-01",
+      "number": 1,
+      "capacity": 2,
+      "zone": "Main Dining Hall",
+      "status": "AVAILABLE"
+    },
+    {
+      "id": "T-02",
+      "number": 2,
+      "capacity": 2,
+      "zone": "Main Dining Hall",
+      "status": "AVAILABLE"
+    },
+    {
+      "id": "T-03",
+      "number": 3,
+      "capacity": 4,
+      "zone": "Main Dining Hall",
+      "status": "OCCUPIED"
+    },
+    {
+      "id": "T-04",
+      "number": 4,
+      "capacity": 4,
+      "zone": "Main Dining Hall",
+      "status": "AVAILABLE"
+    },
+    {
+      "id": "T-05",
+      "number": 5,
+      "capacity": 6,
+      "zone": "Main Dining Hall",
+      "status": "AVAILABLE"
+    },
+    {
+      "id": "T-06",
+      "number": 6,
+      "capacity": 8,
+      "zone": "Main Dining Hall",
+      "status": "RESERVED"
+    },
+    {
+      "id": "T-07",
+      "number": 7,
+      "capacity": 2,
+      "zone": "Window Booth",
+      "status": "OCCUPIED"
+    },
+    {
+      "id": "T-08",
+      "number": 8,
+      "capacity": 4,
+      "zone": "Window Booth",
+      "status": "AVAILABLE"
+    },
+    {
+      "id": "T-09",
+      "number": 9,
+      "capacity": 4,
+      "zone": "Window Booth",
+      "status": "AVAILABLE"
+    },
+    {
+      "id": "T-10",
+      "number": 10,
+      "capacity": 2,
+      "zone": "Garden Terrace",
+      "status": "AVAILABLE"
+    },
+    {
+      "id": "T-11",
+      "number": 11,
+      "capacity": 4,
+      "zone": "Garden Terrace",
+      "status": "AVAILABLE"
+    },
+    {
+      "id": "T-12",
+      "number": 12,
+      "capacity": 6,
+      "zone": "Garden Terrace",
+      "status": "AVAILABLE"
+    }
+  ],
+  "categories": [
+    {
+      "id": "cat-starters",
+      "name": "Starters & Small Plates",
+      "icon": "🥟"
+    },
+    {
+      "id": "cat-mains",
+      "name": "Mains & Entrees",
+      "icon": "🥩"
+    },
+    {
+      "id": "cat-pizzas",
+      "name": "Artisan Wood-Fired Pizzas",
+      "icon": "🍕"
+    },
+    {
+      "id": "cat-desserts",
+      "name": "Decadent Desserts",
+      "icon": "🍮"
+    },
+    {
+      "id": "cat-beverages",
+      "name": "Cocktails & Drinks",
+      "icon": "🍹"
+    }
+  ],
+  "menuItems": [
+    {
+      "id": "menu-01",
+      "categoryId": "cat-starters",
+      "name": "Truffle Wild Mushroom Arancini",
+      "description": "Crispy arborio risotto spheres with black truffle & fontina center.",
+      "price": 14.5,
+      "isAvailable": true,
+      "prepTime": "12m",
+      "badge": "Chef Special"
+    },
+    {
+      "id": "menu-02",
+      "categoryId": "cat-starters",
+      "name": "Crispy Calamari Fritti",
+      "description": "Point judith squid, shishito peppers, lemon caper remoulade.",
+      "price": 16,
+      "isAvailable": true,
+      "prepTime": "10m",
+      "badge": "Popular"
+    },
+    {
+      "id": "menu-03",
+      "categoryId": "cat-starters",
+      "name": "Smoked Burrata Bruschetta",
+      "description": "Heirloom tomato confit, aged balsamic, basil oil, sourdough.",
+      "price": 15.5,
+      "isAvailable": true,
+      "prepTime": "8m",
+      "badge": null
+    },
+    {
+      "id": "menu-05",
+      "categoryId": "cat-mains",
+      "name": "Pan-Seared Chilean Sea Bass",
+      "description": "Saffron risotto, asparagus spears, citrus beurre blanc.",
+      "price": 34,
+      "isAvailable": true,
+      "prepTime": "20m",
+      "badge": "Signature"
+    },
+    {
+      "id": "menu-06",
+      "categoryId": "cat-mains",
+      "name": "Prime Angus Ribeye Steak 10oz",
+      "description": "Hand-cut beef, rosemary fingerling potatoes, truffle butter.",
+      "price": 38.5,
+      "isAvailable": true,
+      "prepTime": "22m",
+      "badge": "Chef Special"
+    },
+    {
+      "id": "menu-07",
+      "categoryId": "cat-mains",
+      "name": "Slow-Braised Pappardelle Bolognese",
+      "description": "Handmade pasta ribbons with 8-hour braised beef ragù.",
+      "price": 22.5,
+      "isAvailable": true,
+      "prepTime": "16m",
+      "badge": "Classic"
+    },
+    {
+      "id": "menu-10",
+      "categoryId": "cat-pizzas",
+      "name": "Wood-Fired Margherita Classico",
+      "description": "San Marzano tomatoes, fresh fior di latte, sweet basil, EVOO.",
+      "price": 18,
+      "isAvailable": true,
+      "prepTime": "12m",
+      "badge": "Bestseller"
+    },
+    {
+      "id": "menu-11",
+      "categoryId": "cat-pizzas",
+      "name": "Calabrian Diavola Pepperoni",
+      "description": "Artisanal spicy soppressata, smoked mozzarella, hot honey.",
+      "price": 20.5,
+      "isAvailable": true,
+      "prepTime": "12m",
+      "badge": "Hot"
+    },
+    {
+      "id": "menu-13",
+      "categoryId": "cat-desserts",
+      "name": "Traditional Espresso Tiramisu",
+      "description": "Espresso ladyfingers, velvety mascarpone, valrhona cocoa.",
+      "price": 10.5,
+      "isAvailable": true,
+      "prepTime": "5m",
+      "badge": "Favorite"
+    },
+    {
+      "id": "menu-15",
+      "categoryId": "cat-beverages",
+      "name": "Smoked Rosemary Old Fashioned",
+      "description": "Kentucky bourbon, aromatic bitters, flamed rosemary sprig.",
+      "price": 14,
+      "isAvailable": true,
+      "prepTime": "5m",
+      "badge": "Signature Cocktail"
+    },
+    {
+      "id": "menu-16",
+      "categoryId": "cat-beverages",
+      "name": "Yuzu Passionfruit Botanical Spritz",
+      "description": "Japanese yuzu extract, passionfruit, sparkling soda, fresh mint.",
+      "price": 8.5,
+      "isAvailable": true,
+      "prepTime": "4m",
+      "badge": "Mocktail"
+    }
+  ],
+  "reservations": [
+    {
+      "id": "RES-790",
+      "customerName": "Yaseen Ahammed",
+      "customerEmail": "yaseenahammed10@gmail.com",
+      "customerPhone": "9747637652",
+      "partySize": 4,
+      "date": "2026-11-03",
+      "timeSlot": "7:30 PM",
+      "tableNumber": 3,
+      "zone": "Main Dining Hall",
+      "status": "CONFIRMED",
+      "createdAt": "2026-11-03T05:43:12.689Z"
+    },
+    {
+      "id": "RES-701",
+      "customerName": "Aarav Mehta",
+      "customerPhone": "+91 98450 11223",
+      "partySize": 4,
+      "date": "2026-11-03",
+      "timeSlot": "19:30",
+      "tableNumber": 3,
+      "zone": "Main Dining Hall",
+      "status": "SEATED",
+      "createdAt": "2026-11-03T05:37:16.478Z"
+    },
+    {
+      "id": "RES-702",
+      "customerName": "Elena Rostova",
+      "customerPhone": "+91 98711 55443",
+      "partySize": 2,
+      "date": "2026-11-03",
+      "timeSlot": "20:00",
+      "tableNumber": 7,
+      "zone": "Window Booth",
+      "status": "SEATED",
+      "createdAt": "2026-11-03T05:37:16.478Z"
+    }
+  ],
+  "orders": [
+    {
+      "id": "ORD-101",
+      "orderType": "DINE_IN",
+      "tableNumber": 3,
+      "customerName": "Aarav Mehta",
+      "customerPhone": "+91 98450 11223",
+      "items": [
+        {
+          "name": "Truffle Wild Mushroom Arancini",
+          "quantity": 2,
+          "price": 14.5
+        },
+        {
+          "name": "Pan-Seared Chilean Sea Bass",
+          "quantity": 2,
+          "price": 34
+        }
+      ],
+      "totalAmount": 101.85,
+      "status": "COMPLETED",
+      "createdAt": "2026-11-03T05:37:16.478Z"
+    }
+  ],
+  "notifications": [
+    {
+      "id": "NOTIF-615018",
+      "timestamp": "2026-11-03T05:43:35.018Z",
+      "type": "SMS",
+      "recipient": "+91 98450 11223",
+      "content": "Aura Dining: Order #ORD-101 is PLATED & READY! Serving to Table #3.",
+      "subject": "",
+      "time": "Just now"
+    },
+    {
+      "id": "NOTIF-592691",
+      "timestamp": "2026-11-03T05:43:12.691Z",
+      "type": "EMAIL",
+      "recipient": "yaseenahammed10@gmail.com",
+      "content": "Aura Dining: Table #RES-790 confirmed for 4 guests on 2026-11-03 at 7:30 PM (Table #3, Main Dining Hall).",
+      "subject": "Table Booking Confirmed #RES-790",
+      "time": "Just now"
+    },
+    {
+      "id": "NOTIF-592690",
+      "timestamp": "2026-11-03T05:43:12.690Z",
+      "type": "SMS",
+      "recipient": "9747637652",
+      "content": "Aura Dining: Table #RES-790 confirmed for 4 guests on 2026-11-03 at 7:30 PM (Table #3, Main Dining Hall).",
+      "subject": "",
+      "time": "Just now"
+    }
+  ],
+  "customers": [
+    {
+      "id": "8b970a7a-6148-4e56-9c27-8b7f3f409dec",
+      "role": "customer",
+      "name": "Ahammed Yaseen N",
+      "email": "yaseen@gmail.com",
+      "phone": "9876543210",
+      "passwordSalt": "8d880128fca1e7a2e86424bc3f3b3082",
+      "passwordHash": "4c10c2e58ce5babefb07e76af5206e908336d45567545cd788ab8b500d9e14110c3d9c968f69916acbb6e7da74e80bbeae4a378975c1dd63194041ab88a96aa5",
+      "createdAt": "2026-11-03T06:25:46.506Z"
+    }
+  ]
+}
