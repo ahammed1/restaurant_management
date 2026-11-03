@@ -1,18 +1,14 @@
 {
-  "name": "restaurant-management-system",
-  "version": "1.0.0",
-  "description": "Digital Restaurant Workflow Automation & Operations Platform",
-  "main": "src/server.js",
+  "name": "aura-dining",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Aura Dining restaurant management system — React and Express migration",
   "scripts": {
-    "start": "node src/server.js",
-    "dev": "node src/server.js"
-  },
-  "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^16.3.1",
-    "express": "^4.18.2",
-    "nodemailer": "^6.9.7",
-    "socket.io": "^4.7.2",
-    "twilio": "^4.19.0"
+    "backend:install": "npm --prefix backend install",
+    "frontend:install": "npm --prefix frontend install",
+    "backend:dev": "npm --prefix backend run dev",
+    "frontend:dev": "npm --prefix frontend run dev",
+    "backend:start": "npm --prefix backend start",
+    "frontend:build": "npm --prefix frontend run build"
   }
 }
