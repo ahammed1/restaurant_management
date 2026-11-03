@@ -1,63 +1,24 @@
 import { useEffect, useMemo, useState } from 'react';
-
 const API = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-const categories = ['All', 'Starters', 'Mains', 'Pizza', 'Desserts', 'Drinks'];
+const categories = ['All','Starters','Mains','Pizza','Desserts','Drinks'];
 const sampleMenu = [
-  { _id: 'm1', name: 'Truffle Wild Mushroom Arancini', category: 'Starters', description: 'Crispy risotto, wild mushroom, parmesan and herb aioli.', price: 495, badge: 'Chef special' },
-  { _id: 'm2', name: 'Smoked Burrata Bruschetta', category: 'Starters', description: 'Heirloom tomato, basil oil and toasted sourdough.', price: 425, badge: 'Popular' },
-  { _id: 'm3', name: 'Pan-Seared Sea Bass', category: 'Mains', description: 'Seasonal greens, saffron rice and citrus butter sauce.', price: 1195, badge: 'Signature' },
-  { _id: 'm4', name: 'Slow-Braised Pappardelle', category: 'Mains', description: 'Handmade pasta with slow-cooked tomato ragù.', price: 795 },
-  { _id: 'm5', name: 'Wood-Fired Margherita', category: 'Pizza', description: 'San Marzano tomato, mozzarella and fresh basil.', price: 645, badge: 'Bestseller' },
-  { _id: 'm6', name: 'Espresso Tiramisu', category: 'Desserts', description: 'Mascarpone cream, espresso-soaked sponge and cocoa.', price: 395 },
-];
-
-export default function App() {
-  const [menu, setMenu] = useState(sampleMenu);
-  const [category, setCategory] = useState('All');
-  const [search, setSearch] = useState('');
-  const [cart, setCart] = useState([]);
-  const [apiStatus, setApiStatus] = useState('Checking service…');
-  const [activeView, setActiveView] = useState('menu');
-
-  useEffect(() => {
-    fetch(`${API}/api/health`).then(r => r.json()).then(() => setApiStatus('Service connected')).catch(() => setApiStatus('Demo mode · API not connected'));
-    fetch(`${API}/api/menu`).then(r => r.json()).then(data => {
-      if (data.success && Array.isArray(data.items) && data.items.length) setMenu(data.items);
-    }).catch(() => {});
-  }, []);
-
-  const visibleMenu = useMemo(() => menu.filter(item =>
-    (category === 'All' || String(item.category || item.categoryName || '').toLowerCase().includes(category.toLowerCase())) &&
-    `${item.name} ${item.description || ''}`.toLowerCase().includes(search.toLowerCase())
-  ), [menu, category, search]);
-
-  const addToCart = item => setCart(current => {
-    const found = current.find(row => row._id === item._id);
-    return found ? current.map(row => row._id === item._id ? { ...row, quantity: row.quantity + 1 } : row) : [...current, { ...item, quantity: 1 }];
-  });
-  const total = cart.reduce((sum, item) => sum + Number(item.price) * item.quantity, 0);
-
-  return <div className="app-shell">
-    <header className="topbar">
-      <a className="brand" href="#"><span className="brand-mark">A</span><span><strong>Aura Dining</strong><small>MODERN DINING & KITCHEN</small></span></a>
-      <nav><button className={activeView === 'menu' ? 'nav-link active' : 'nav-link'} onClick={() => setActiveView('menu')}>Discover menu</button><button className={activeView === 'reserve' ? 'nav-link active' : 'nav-link'} onClick={() => setActiveView('reserve')}>Reservations</button></nav>
-      <button className="cart-button" onClick={() => setActiveView('cart')}>Your order <span>{cart.reduce((n, item) => n + item.quantity, 0)}</span></button>
-    </header>
-    <main>
-      <section className="hero">
-        <div className="hero-copy"><p className="eyebrow">A TABLE WORTH GATHERING AROUND</p><h1>Good food.<br/><em>Beautiful moments.</em></h1><p className="hero-description">Thoughtfully prepared plates, warm hospitality and a dining experience made to be remembered.</p><button className="primary-button" onClick={() => document.getElementById('menu')?.scrollIntoView({ behavior: 'smooth' })}>Explore the menu <span>↗</span></button></div>
-        <div className="hero-art"><div className="hero-orbit orbit-one"></div><div className="hero-orbit orbit-two"></div><div className="hero-plate"><span>✳</span></div><div className="hero-note">FRESHLY PREPARED<br/>WITH INTENTION</div></div>
-      </section>
-      <div className="status-line"><span className="status-dot"></span>{apiStatus}<span className="status-divider">/</span> Bengaluru · Open today 12 PM – 11 PM</div>
-      {activeView === 'menu' && <section id="menu" className="menu-section">
-        <div className="section-heading"><div><p className="eyebrow">MADE WITH CARE</p><h2>Our menu</h2></div><label className="search"><span>⌕</span><input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search dishes"/></label></div>
-        <div className="category-row">{categories.map(item => <button key={item} className={category === item ? 'category active' : 'category'} onClick={() => setCategory(item)}>{item}</button>)}</div>
-        <div className="menu-grid">{visibleMenu.map((item, index) => <article className="menu-card" key={item._id}><div className={`dish-art art-${index % 4}`}><span>{['✳','◒','❋','✺'][index % 4]}</span>{item.badge && <small>{item.badge}</small>}</div><div className="dish-info"><p className="dish-category">{item.category || item.categoryName || 'FROM OUR KITCHEN'}</p><h3>{item.name}</h3><p className="dish-description">{item.description}</p><div className="dish-bottom"><strong>₹{Number(item.price).toLocaleString('en-IN')}</strong><button onClick={() => addToCart(item)} aria-label={`Add ${item.name}`}>＋</button></div></div></article>)}</div>
-        {visibleMenu.length === 0 && <p className="empty-state">No dishes match your search. Try another name or category.</p>}
-      </section>}
-      {activeView === 'cart' && <section className="simple-panel"><p className="eyebrow">YOUR SELECTION</p><h2>Your order</h2>{cart.length === 0 ? <p>Your cart is waiting for something delicious.</p> : <>{cart.map(item => <div className="cart-row" key={item._id}><span>{item.name} <small>× {item.quantity}</small></span><strong>₹{(item.price * item.quantity).toLocaleString('en-IN')}</strong></div>)}<div className="cart-total"><span>Subtotal</span><strong>₹{total.toLocaleString('en-IN')}</strong></div><p className="checkout-note">Checkout and payment integration will be enabled in the next migration stage.</p></>}</section>}
-      {activeView === 'reserve' && <section className="simple-panel"><p className="eyebrow">MAKE IT A MOMENT</p><h2>Reservations</h2><p>Table booking is being connected to the new MongoDB reservation service. Your existing booking experience remains available in the original app during this migration.</p></section>}
-      <footer><span>© {new Date().getFullYear()} Aura Dining</span><span>Thoughtful dining, every day.</span></footer>
-    </main>
-  </div>;
+{_id:'m1',name:'Truffle Wild Mushroom Arancini',category:'Starters',description:'Crispy risotto, wild mushroom, parmesan and herb aioli.',price:495,badge:'Chef special'},
+{_id:'m2',name:'Smoked Burrata Bruschetta',category:'Starters',description:'Heirloom tomato, basil oil and toasted sourdough.',price:425,badge:'Popular'},
+{_id:'m3',name:'Pan-Seared Sea Bass',category:'Mains',description:'Seasonal greens, saffron rice and citrus butter sauce.',price:1195,badge:'Signature'},
+{_id:'m4',name:'Slow-Braised Pappardelle',category:'Mains',description:'Handmade pasta with slow-cooked tomato ragù.',price:795},
+{_id:'m5',name:'Wood-Fired Margherita',category:'Pizza',description:'San Marzano tomato, mozzarella and fresh basil.',price:645,badge:'Bestseller'},
+{_id:'m6',name:'Espresso Tiramisu',category:'Desserts',description:'Mascarpone cream, espresso-soaked sponge and cocoa.',price:395}];
+export default function App(){
+const [menu,setMenu]=useState(sampleMenu),[category,setCategory]=useState('All'),[search,setSearch]=useState(''),[cart,setCart]=useState([]),[apiStatus,setApiStatus]=useState('Checking service…'),[activeView,setActiveView]=useState('menu');
+useEffect(()=>{fetch(`${API}/api/health`).then(r=>r.json()).then(()=>setApiStatus('Service connected')).catch(()=>setApiStatus('Demo mode · API not connected'));fetch(`${API}/api/menu`).then(r=>r.json()).then(data=>{if(data.success&&Array.isArray(data.items)&&data.items.length)setMenu(data.items)}).catch(()=>{});},[]);
+const visibleMenu=useMemo(()=>menu.filter(item=>(category==='All'||String(item.category||item.categoryName||'').toLowerCase().includes(category.toLowerCase()))&&`${item.name} ${item.description||''}`.toLowerCase().includes(search.toLowerCase())),[menu,category,search]);
+const addToCart=item=>setCart(current=>{const found=current.find(row=>row._id===item._id);return found?current.map(row=>row._id===item._id?{...row,quantity:row.quantity+1}:row):[...current,{...item,quantity:1}]});
+const total=cart.reduce((sum,item)=>sum+Number(item.price)*item.quantity,0);
+return <div className="app-shell"><header className="topbar"><a className="brand" href="#"><span className="brand-mark">A</span><span><strong>Aura Dining</strong><small>MODERN DINING & KITCHEN</small></span></a><nav><button className={activeView==='menu'?'nav-link active':'nav-link'} onClick={()=>setActiveView('menu')}>Discover menu</button><button className={activeView==='reserve'?'nav-link active':'nav-link'} onClick={()=>setActiveView('reserve')}>Reservations</button></nav><button className="cart-button" onClick={()=>setActiveView('cart')}>Your order <span>{cart.reduce((n,item)=>n+item.quantity,0)}</span></button></header><main>
+<section className="hero"><div className="hero-copy"><p className="eyebrow">A TABLE WORTH GATHERING AROUND</p><h1>Good food.<br/><em>Beautiful moments.</em></h1><p className="hero-description">Thoughtfully prepared plates, warm hospitality and a dining experience made to be remembered.</p><button className="primary-button" onClick={()=>document.getElementById('menu')?.scrollIntoView({behavior:'smooth'})}>Explore the menu <span>↗</span></button></div><div className="hero-art"><div className="hero-orbit orbit-one"></div><div className="hero-orbit orbit-two"></div><div className="hero-plate"><span>✳</span></div><div className="hero-note">FRESHLY PREPARED<br/>WITH INTENTION</div></div></section>
+<div className="status-line"><span className="status-dot"></span>{apiStatus}<span className="status-divider">/</span> Bengaluru · Open today 12 PM – 11 PM</div>
+{activeView==='menu'&&<section id="menu" className="menu-section"><div className="section-heading"><div><p className="eyebrow">MADE WITH CARE</p><h2>Our menu</h2></div><label className="search"><span>⌕</span><input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search dishes"/></label></div><div className="category-row">{categories.map(item=><button key={item} className={category===item?'category active':'category'} onClick={()=>setCategory(item)}>{item}</button>)}</div><div className="menu-grid">{visibleMenu.map((item,index)=><article className="menu-card" key={item._id}><div className={`dish-art art-${index%4}`}><span>{['✳','◒','❋','✺'][index%4]}</span>{item.badge&&<small>{item.badge}</small>}</div><div className="dish-info"><p className="dish-category">{item.category||item.categoryName||'FROM OUR KITCHEN'}</p><h3>{item.name}</h3><p className="dish-description">{item.description}</p><div className="dish-bottom"><strong>₹{Number(item.price).toLocaleString('en-IN')}</strong><button onClick={()=>addToCart(item)} aria-label={`Add ${item.name}`}>＋</button></div></div></article>)}</div>{visibleMenu.length===0&&<p className="empty-state">No dishes match your search. Try another name or category.</p>}</section>}
+{activeView==='cart'&&<section className="simple-panel"><p className="eyebrow">YOUR SELECTION</p><h2>Your order</h2>{cart.length===0?<p>Your cart is waiting for something delicious.</p>:<>{cart.map(item=><div className="cart-row" key={item._id}><span>{item.name} <small>× {item.quantity}</small></span><strong>₹{(item.price*item.quantity).toLocaleString('en-IN')}</strong></div>)}<div className="cart-total"><span>Subtotal</span><strong>₹{total.toLocaleString('en-IN')}</strong></div><p className="checkout-note">Checkout and payment integration will be enabled in the next migration stage.</p></>}</section>}
+{activeView==='reserve'&&<section className="simple-panel"><p className="eyebrow">MAKE IT A MOMENT</p><h2>Reservations</h2><p>Table booking is being connected to the new MongoDB reservation service. Your existing booking experience remains available in the original app during this migration.</p></section>}
+<footer><span>© {new Date().getFullYear()} Aura Dining</span><span>Thoughtful dining, every day.</span></footer></main></div>;
 }
